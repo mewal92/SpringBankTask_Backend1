@@ -35,9 +35,14 @@ public class CategoryController {
 
     @GetMapping("/delete/{id}")
     public String deleteById(@PathVariable Long id) {
-        Category category = categoryRepository.getReferenceById(id);
         categoryRepository.getReferenceById(id);
         return "deleted";
+    }
+
+    @PostMapping("/add")
+    public String createCategoryAsPost(@RequestBody Category category) {
+        categoryRepository.save(category);
+        return "Category " + category.getCategory() + " created";
     }
 
 }
