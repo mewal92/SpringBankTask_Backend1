@@ -19,7 +19,7 @@ public class CategoryController {
         return categoryRepository.findAll();
     }
 
-    @PostMapping("/add/{category}")
+    @GetMapping("/add/{category}")
     public String createCategory(@PathVariable String category) {
         Category c = new Category();
         c.setCategory(category);
@@ -27,8 +27,18 @@ public class CategoryController {
         return "Category " + category + " created";
     }
 
+
     @GetMapping("/get/{id}")
     public Category getCategory(@PathVariable Long id) {
         return categoryRepository.findById(id).get();
     }
+
+    @GetMapping("/delete/{id}")
+    public String deleteById(@PathVariable Long id) {
+        Category category = categoryRepository.getReferenceById(id);
+        categoryRepository.getReferenceById(id);
+        return "deleted";
+    }
+
 }
+

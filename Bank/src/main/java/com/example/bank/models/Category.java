@@ -13,7 +13,7 @@ import java.util.List;
 @Entity
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
+//@AllArgsConstructor
 public class Category {
 
     @Id
@@ -21,11 +21,16 @@ public class Category {
     private Long id;
     private String category;
 
-    @OneToMany(mappedBy = "category")
-    private List<Customer> customers;
+   // @OneToMany(mappedBy = "category")
+   // private List<Customer> customers;
 
 
     public Category(String category){
+        this.category = category;
+    }
+
+    public Category(Long id, String category) {
+        this.id = id;
         this.category = category;
     }
 }
