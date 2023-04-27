@@ -1,6 +1,7 @@
 package com.example.bank.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -31,6 +32,8 @@ public class Customer {
         this.ssn=ssn;
         this.kpi = kpi;
     }
+
+    ObjectMapper objectMapper = new ObjectMapper();
 
 
     //Nedanstående hör till N-1-filmen
