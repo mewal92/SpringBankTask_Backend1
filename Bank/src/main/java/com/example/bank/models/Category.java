@@ -13,24 +13,22 @@ import java.util.List;
 @Entity
 @Data
 @NoArgsConstructor
-//@AllArgsConstructor
+@AllArgsConstructor
 public class Category {
 
     @Id
     @GeneratedValue
-    private Long id;
-    private String category;
+    private Long Id;
+    private String name;
 
-   // @OneToMany(mappedBy = "category")
-   // private List<Customer> customers;
-
-
-    public Category(String category){
-        this.category = category;
+    public Category(String name){
+        this.name=name;
     }
 
-    public Category(Long id, String category) {
-        this.id = id;
-        this.category = category;
-    }
+    //Hör till 1-N-filmen
+    @OneToMany(mappedBy="category")
+    private List<Customer> customer;
+
+
+
 }

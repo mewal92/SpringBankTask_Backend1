@@ -1,35 +1,31 @@
 package com.example.bank.controller;
 import com.example.bank.models.Account;
 import com.example.bank.repositories.AccountRepository;
-import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 
-@RequiredArgsConstructor
-@RequestMapping("/account")
 @RestController
-
 public class AccountController {
+
     private final AccountRepository accountRepository;
 
-    @PutMapping("/accounts/{id}")
-    public void updateAccount(@PathVariable long id,
-                              @RequestParam(required = false) Double balance,
-                              @RequestParam(required = false) Double interest) {
-        // lookup the account by ID here
-        Account account = accountRepository.findById(id).get();
-
-        // update the balance if specified
-        if (balance != null) {
-            account.setBalance(balance);
-        }
-
-        // update the interest if specified
-        if (interest != null) {
-            account.setInterest(interest);
-        }
-
-        // save the updated account here
-        accountRepository.save(account);
+    AccountController(AccountRepository accountRepository){
+        this.accountRepository=accountRepository;
     }
+
+    @RequestMapping("konton")
+    public List<Account> getAllAccounts(){
+        return accountRepository.findAll();
+    }
+
+    @RequestMapping("konton/delete/{id}")
+    public String deleteAccount(@PathVariable Long id){
+        accountRepository.deleteById(id);
+        return "konto togs bort";
+    }
+
 }

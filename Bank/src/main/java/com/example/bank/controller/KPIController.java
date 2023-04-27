@@ -9,21 +9,28 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@RequiredArgsConstructor
-@RequestMapping("/kpi")
+import org.springframework.web.bind.annotation.RequestParam;
+
+
 @RestController
 public class KPIController {
 
     private final KPIRepository kpiRepository;
 
-    @RequestMapping("/all")
-    public List<KPI> getAllKPI() {
+    KPIController(KPIRepository kpiRepository){
+        this.kpiRepository=kpiRepository;
+    }
+
+    @RequestMapping("kpis")
+    public List<KPI> getAllKPIs(){
         return kpiRepository.findAll();
     }
 
-    @RequestMapping("/add/{credit}")
-    public String addNewKPI(@PathVariable int credit) {
-        kpiRepository.save(new KPI(null, credit));
-        return "KPI" + credit + " saved";
+    @RequestMapping("kpi/add")
+    public String addKPIs(@RequestParam int cred){
+        kpiRepository.save(new KPI(cred));
+        return "kpi "+cred+" added";
     }
+
+
 }

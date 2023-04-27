@@ -20,36 +20,27 @@ public class BankApplication {
 
 
     }
-    /*@Bean
-    public CommandLineRunner bank(KPIRepository kpiRepository, CustomerRepository customerRepository, CategoryRepository categoryRepository) {
-        return (args) -> {
-            KPI k1 = new KPI(null, 45);
-            KPI k2 = new KPI(null, 102);
-            KPI k3 = new KPI(null, 55);
 
-          kpiRepository.save(k1);
-          kpiRepository.save(k2);
-         kpiRepository.save(k3);
-
-            Category cat1 = new Category("Gigachad medlem");
-            Category cat2 = new Category("Power ranger medlem");
-            Category cat3 = new Category("Magikarp medlem");
-
-            categoryRepository.save(cat1);
-            categoryRepository.save(cat2);
-            categoryRepository.save(cat3);
-
-            Customer c1 = new Customer("Göran", "860327", k1, cat1);
-            Customer c2 = new Customer("Märta", "341202", k2, cat2);
-            Customer c3 = new Customer("Hassan", "021005", k3, cat3);
-
-          c1.setCategory(cat1);
-       c2.setCategory(cat2);
-      c3.setCategory(cat3);
-
-            customerRepository.save(c1);
-            customerRepository.save(c2);
-            customerRepository.save(c3);
-        };
-    }*/
+//    @Bean
+//    public CommandLineRunner demo(KPIRepository kpiRepository, CustomerRepository customerRepository,
+//                                  CategoryRepository categoryRepository) {
+//        return (args) -> {
+//            KPI k1 = new KPI(45);
+//            KPI k2 = new KPI(76);
+//            KPI k3 = new KPI(3);
+//            Category kat1 = new Category("guld");
+//            Category kat2 = new Category("silver");
+//            Category kat3 = new Category("brons");
+//            //Vill inte cascada kategorierna pga N-1, och pga "on delete cascade" inte önskvärt beteende
+//            categoryRepository.save(kat1);
+//            categoryRepository.save(kat2);
+//            categoryRepository.save(kat3);
+//            Customer kund1 = new Customer("Mimmi", "435255", k1, kat1);
+//            Customer kund2 = new Customer("Börje", "435255", k2, kat1);
+//            Customer kund3 = new Customer("Elvis", "435255", k3, kat3);
+//            customerRepository.save(kund1);
+//            customerRepository.save(kund2);
+//            customerRepository.save(kund3);
+//        };
+//    }
 }

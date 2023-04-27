@@ -3,7 +3,6 @@ package com.example.bank.models;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,11 +15,12 @@ public class KPI {
 
     @Id
     @GeneratedValue
-    private Long id;
+    private Long Id;
+    private int credit;
 
-    private Integer credit;
+    public KPI(int credit){
+        this.credit=credit;
+    }
 
-//    @OneToOne(mappedBy = "address")
-//    private Customer customer;
 
 }

@@ -17,39 +17,42 @@ public class Customer {
 
     @Id
     @GeneratedValue
-    private long id;
+    private Long Id;
     private String name;
-    private String birthDate;
+    private String ssn;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn
-    //@OnDelete(action = OnDeleteAction.CASCADE)
+    @JoinColumn               //FK-kolumn kommer, i default-fallet, att heta kpi_id
+    //@JoinColumn(name="myFK", referencedColumnName="kreditvardighet")
     private KPI kpi;
 
+    public Customer(String name, String ssn, KPI kpi){
+        this.name=name;
+        this.ssn=ssn;
+        this.kpi = kpi;
+    }
+
+
+    //Nedanstående hör till N-1-filmen
     @ManyToOne
     @JoinColumn
-    @JsonIgnore
+    @JsonIgnore                               //Denna rad hör till 1-N-filmen
     private Category category;
 
-    @ManyToMany(cascade=CascadeType.ALL)
-    @JoinTable
-    private List<Account> account = new ArrayList<>();
-
-    public Customer(String name, String birthDate, KPI kpi) {
-    }
-
-    public Customer(Long id) {
-        this.id = id;
-    }
-
-    public Customer(String name, String birthDate, KPI kpi, Category category) {
-        this.name = name;
-        this.birthDate = birthDate;
+    public Customer(String name, String ssn, KPI kpi, Category category){
+        this.name=name;
+        this.ssn=ssn;
         this.kpi = kpi;
         this.category = category;
     }
 
-    public void addAccount(Account account){
-        this.account.add(account);
+    //Nedanstående hör till N-M-filmen
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable
+    private List<Account> account = new ArrayList<>();
+
+    public void addKonto(Account k){
+        account.add(k);
     }
+
 }

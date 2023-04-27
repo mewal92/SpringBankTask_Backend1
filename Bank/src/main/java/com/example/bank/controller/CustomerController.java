@@ -1,46 +1,74 @@
 package com.example.bank.controller;
 
-import com.example.bank.models.Account;
 import com.example.bank.models.Customer;
+import com.example.bank.models.KPI;
 import com.example.bank.repositories.AccountRepository;
+import com.example.bank.repositories.CategoryRepository;
 import com.example.bank.repositories.CustomerRepository;
 import com.example.bank.repositories.KPIRepository;
-import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.*;
+import lombok.AllArgsConstructor;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.Map;
 
-@RequiredArgsConstructor
-@RequestMapping("/customer")
+
 @RestController
+@AllArgsConstructor
 public class CustomerController {
 
-    private final CustomerRepository customerRepository;
-    private final KPIRepository kpiRepository;
-    private final AccountRepository accountRepository;
 
-    @GetMapping ("/all")
-    public List<Customer> getAllCustomer() {
-        return customerRepository.findAll();
+    private final KPIRepository repo;
+    private final CustomerRepository kundRepo;
+    private final AccountRepository kontoRepo;
+
+    private final CategoryRepository katRepo;
+
+//    CustomerController(KPIRepository repo, CustomerRepository kundRepo, CategoryRepository katRepo, AccountRepository kontoRepo){
+//        this.repo=repo;
+//        this.kundRepo=kundRepo;
+//        this.katRepo=katRepo;
+//        this.kontoRepo=kontoRepo;
+//    }
+
+    @RequestMapping("kunder")
+    public List<Customer> getAllKunder() {
+        return kundRepo.findAll();
     }
 
-    @RequestMapping("/add/{id}")
-    public String addNewCustomer(@RequestBody Customer customer,
-                            @PathVariable Long id) {
-        customer.setKpi(kpiRepository.findById(id).get());
-        customerRepository.save(customer);
-        return "Customer" + customer + " saved";
+    @RequestMapping("kunder/add1")
+    public String addKunder1(@RequestParam String namn, @RequestParam String ssn,
+                             @RequestParam int cred) {
+        KPI kpi = new KPI(cred);
+        repo.save(kpi);
+        kundRepo.save(new Customer(namn, ssn, kpi));
+        return "kund " + namn + " added (1) ";
     }
 
-    @RequestMapping("/addKonto/{id}/{balance}/{interest}")
-    public String addKonto(@PathVariable Long id, @PathVariable double balance,
-                           @PathVariable double interest){
-        Customer kund = customerRepository.findById(id).get();
-        if (kund != null){
-            kund.addAccount(new Account(balance, interest));
-            customerRepository.save(kund);
+    @RequestMapping("kunder/add0")
+    public String addKunder(@RequestParam String namn, @RequestParam String ssn,
+                            @RequestParam Long id) {
+        KPI kpi = repo.findById(id).get();
+        if (kpi != null) {
+            kundRepo.save(new Customer(namn, ssn, kpi));
+            return "kund " + namn + " added";
         }
-        return "konto lades till hos kund med id "+ id;
+        return "Ogiltigt id";
+    }
+
+    @RequestMapping("kunder/add2")
+    public String addKunder2(@RequestParam String namn, @RequestParam String ssn,
+                             @RequestParam int cred) {
+        KPI kpi = new KPI(cred);
+        kundRepo.save(new Customer(namn, ssn, kpi));
+        return "kund " + namn + " added (2) ";
+    }
+
+    @RequestMapping("kunder/delete/{id}")
+    public String deleteKund(@PathVariable Long id) {
+        kundRepo.deleteById(id);
+        return "kund " + id + " togs bort";
     }
 }

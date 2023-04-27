@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Bankson</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<h1 th:text="'100% pålitlig bank'"></h1>
+<p th:text="'Visst vill du bli en kund här? Kör fööfaan'"><br>
+<hr>
+
+<form action="hellocustomer" method="post">
+    <label for="name">Name:</label><br>
+    <input type="text" id="name" name="name" value=""><br>
+    <label for="ssn">Social Security Number:</label><br>
+    <input type="text" id="ssn" name="ssn" value=""><br><br>
+    <input type="submit" value="Lägg till">
+</form>
+<br>
+<hr>
+
+
+</body>
+</html>

@@ -8,26 +8,22 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
 
 @Entity
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 public class Account {
 
     @Id
     @GeneratedValue
-    private Long id;
+    private Long Id;
+    private int saldo;
+    private int ranta;
 
-    private Double balance;
-    private Double interest;
-
-//    @ManyToMany(mappedBy = "account")
-//    List<Customer> customer;
-
-    public Account(Double balance,Double interest ){
-        this.balance = balance;
-        this.interest = interest;
+    public Account(int saldo, int ranta){
+        this.saldo=saldo;
+        this.ranta=ranta;
     }
+
+
 }

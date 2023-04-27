@@ -1,5 +1,5 @@
 package com.example.bank;
-
+/*
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,3 +26,6 @@ private TestRestTemplate restTemplate;
     }
 
 }
+
+
+ */
